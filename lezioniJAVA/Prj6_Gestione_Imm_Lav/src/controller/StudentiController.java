@@ -18,8 +18,8 @@ public class StudentiController {
 	
 	private Scanner scanner;
 	
-	public StudentiController(Scanner scanner){
-		this.scanner = scanner;
+	public StudentiController() {
+		this.scanner = new Scanner(System.in);
 	}
 	
 	// Inserisce un nuovo Studente nel DB
@@ -73,7 +73,10 @@ public class StudentiController {
             while ((linea = br.readLine()) != null) {
 				if (linea.trim().isEmpty()) continue;
 				String[] dati = linea.split(",");
-				
+				if (dati.length == 4) {
+                    // Ricrea l'oggetto Studente dalla riga CSV
+                    studenti.add(new Studente(dati[0], dati[1], dati[2], dati[3]));
+                }
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("CorsiDB.csv non trovato. Verrà creato al primo inserimento");

@@ -19,9 +19,9 @@ public class CorsoController {
 	private Corso corso;
 	private Scanner scanner;
 	
-	public CorsoController(Scanner scanner) {
-		this.scanner = (scanner);
+	public CorsoController() {
 		
+		this.scanner = new Scanner(System.in);
 	}
 	
 	// Inserisce un nuovo corso nel file CSV
@@ -38,7 +38,7 @@ public class CorsoController {
 			int numMax = scanner.nextInt();
 			scanner.nextLine();
 			
-			Corso nuovoCorso = new Corso(titolo, codice, numMax, null);
+			Corso nuovoCorso = new Corso(titolo, codice, numMax);
 			scriviCorsoSuDB(nuovoCorso.toCSVString(), DB_PATH);
 			// chiama il metodo di scrittura private
 			
@@ -68,7 +68,13 @@ public class CorsoController {
 		try (BufferedReader br = new BufferedReader(new FileReader(DB_PATH))){
 			String linea;
 			while ((linea = br.readLine()) != null) {
-				String[] dati = linea.split(",");
+				if (linea.trim().isEmpty()) continue;
+                String[] dati = linea.split(",");
+                
+                if (dati.length == 3) {
+                    // Ricrea l'oggetto Corso dalla riga CSV
+                    corsi.add(new Corso(dati[0], dati[1], Integer.parseInt(dati[2])));
+                }
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("CorsiDB.csv non trovato. Verrà creato al primo inserimento");

@@ -7,8 +7,8 @@ import controller.StudentiController;
 
 public class Main {
 	private static Scanner scan;
-	private static CorsoController corsoCtrl = new CorsoController(scan);
-	private static StudentiController studenteCtrl = new StudenteController(scan);
+	private static CorsoController corsoCtrl = new CorsoController();
+	private static StudentiController studenteCtrl = new StudentiController();
 	
 	public static void main(String[] args) {
 		System.out.println("--- Gestione  Menu---");
@@ -39,7 +39,7 @@ public class Main {
 				String titolo = scan.nextLine();
 				System.out.println("Inserisci codice del corso: ");
 				String codice = scan.nextLine();
-				corsoCtrl.inserisciNuovoCorso(titolo, codice);
+				break;
 				
 			case 6: 
 				scan.nextLine();
@@ -47,7 +47,7 @@ public class Main {
 				String nome = scan.nextLine();
 				System.out.println("Inserisci cognome dello studente: ");
 				String cognome = scan.nextLine();
-				studenteCtrl.inserisciNuovoStudente(nome, cognome);
+				break;
 			case 7:
 				System.out.println("Arrivederci");
 				flag = false;

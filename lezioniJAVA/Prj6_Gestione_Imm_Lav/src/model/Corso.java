@@ -12,7 +12,7 @@ public class Corso {
 	
 	
 	
-	public Corso(String titolo, String codice, int numPartecipanti, List<Corso> listaCorsi) {
+	public Corso(String titolo, String codice, int numPartecipanti) {
 		this.titolo = titolo;
 		this.codice = codice;
 		this.numPartecipanti = numPartecipanti;
